@@ -1,6 +1,5 @@
 import React from 'react';
-import { Home, Compass, PlaySquare, Clock, ThumbsUp, Download, User, Settings, HelpCircle } from 'lucide-react';
-import { Button } from './ui/button';
+import { Home, Compass, PlaySquare, Clock, ThumbsUp, Download, Settings, HelpCircle } from 'lucide-react';
 
 const Sidebar = ({ isOpen, className = '' }) => {
   const menuItems = [
@@ -31,10 +30,8 @@ const Sidebar = ({ isOpen, className = '' }) => {
           {menuItems.map((item, index) => {
             const IconComponent = item.icon;
             return (
-              <Button
+              <button
                 key={index}
-                variant="ghost"
-                size="sm"
                 className={`flex flex-col items-center justify-center p-3 rounded-lg h-16 w-16 ${
                   item.active 
                     ? 'bg-gray-800 text-white' 
@@ -43,7 +40,7 @@ const Sidebar = ({ isOpen, className = '' }) => {
               >
                 <IconComponent className="h-6 w-6 mb-1" />
                 <span className="text-xs">{item.label}</span>
-              </Button>
+              </button>
             );
           })}
         </div>
@@ -59,10 +56,9 @@ const Sidebar = ({ isOpen, className = '' }) => {
           {menuItems.map((item, index) => {
             const IconComponent = item.icon;
             return (
-              <Button
+              <button
                 key={index}
-                variant="ghost"
-                className={`w-full justify-start mb-1 h-10 px-3 rounded-lg ${
+                className={`w-full flex items-center justify-start mb-1 h-10 px-3 rounded-lg ${
                   item.active 
                     ? 'bg-gray-800 text-white' 
                     : 'text-gray-400 hover:bg-gray-800 hover:text-white'
@@ -70,7 +66,7 @@ const Sidebar = ({ isOpen, className = '' }) => {
               >
                 <IconComponent className="h-5 w-5 mr-3" />
                 {item.label}
-              </Button>
+              </button>
             );
           })}
         </nav>
@@ -83,14 +79,13 @@ const Sidebar = ({ isOpen, className = '' }) => {
           {libraryItems.map((item, index) => {
             const IconComponent = item.icon;
             return (
-              <Button
+              <button
                 key={index}
-                variant="ghost"
-                className="w-full justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200"
+                className="w-full flex items-center justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200"
               >
                 <IconComponent className="h-5 w-5 mr-3" />
                 {item.label}
-              </Button>
+              </button>
             );
           })}
         </nav>
@@ -101,10 +96,9 @@ const Sidebar = ({ isOpen, className = '' }) => {
         <nav className="px-3">
           <h3 className="text-gray-400 text-sm font-semibold mb-3 px-3">Subscriptions</h3>
           {subscriptions.map((subscription, index) => (
-            <Button
+            <button
               key={index}
-              variant="ghost"
-              className="w-full justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200"
+              className="w-full flex items-center justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200"
             >
               <div className="relative mr-3">
                 <img 
@@ -117,7 +111,7 @@ const Sidebar = ({ isOpen, className = '' }) => {
                 )}
               </div>
               <span className="truncate">{subscription.name}</span>
-            </Button>
+            </button>
           ))}
         </nav>
 
@@ -125,20 +119,14 @@ const Sidebar = ({ isOpen, className = '' }) => {
 
         {/* Settings */}
         <nav className="px-3">
-          <Button
-            variant="ghost"
-            className="w-full justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200"
-          >
+          <button className="w-full flex items-center justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200">
             <Settings className="h-5 w-5 mr-3" />
             Settings
-          </Button>
-          <Button
-            variant="ghost"
-            className="w-full justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200"
-          >
+          </button>
+          <button className="w-full flex items-center justify-start mb-1 h-10 px-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all duration-200">
             <HelpCircle className="h-5 w-5 mr-3" />
             Help
-          </Button>
+          </button>
         </nav>
       </div>
     </aside>

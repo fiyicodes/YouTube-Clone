@@ -1,12 +1,5 @@
 import React from 'react';
 import { CheckCircle, MoreVertical } from 'lucide-react';
-import { Button } from './ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu';
 
 const VideoCard = ({ video, onClick, size = 'normal' }) => {
   const handleClick = () => {
@@ -58,29 +51,12 @@ const VideoCard = ({ video, onClick, size = 'normal' }) => {
           </div>
         </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="opacity-0 group-hover:opacity-100 transition-opacity p-1 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-800"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <MoreVertical className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-gray-900 border-gray-700">
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Add to queue
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Save to Watch later
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Save to playlist
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <button
+          className="opacity-0 group-hover:opacity-100 transition-opacity p-1 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-800 rounded"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <MoreVertical className="h-4 w-4" />
+        </button>
       </div>
     );
   }
@@ -121,32 +97,12 @@ const VideoCard = ({ video, onClick, size = 'normal' }) => {
           </div>
         </div>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="opacity-0 group-hover:opacity-100 transition-all duration-200 p-2 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-800"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <MoreVertical className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-gray-900 border-gray-700">
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Add to queue
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Save to Watch later
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Save to playlist
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-gray-300 hover:bg-gray-800">
-              Not interested
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <button
+          className="opacity-0 group-hover:opacity-100 transition-all duration-200 p-2 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-800 rounded"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <MoreVertical className="h-4 w-4" />
+        </button>
       </div>
     </div>
   );
