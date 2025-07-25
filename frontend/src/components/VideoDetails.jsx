@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { ThumbsUp, ThumbsDown, Share, Download, MoreHorizontal, CheckCircle } from 'lucide-react';
-import { Button } from './ui/button';
-import { Separator } from './ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 
 const VideoDetails = ({ video }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -54,70 +51,53 @@ const VideoDetails = ({ video }) => {
         <div className="flex items-center space-x-2">
           {/* Like/Dislike */}
           <div className="flex bg-gray-800 rounded-full">
-            <Button
-              variant="ghost"
-              size="sm"
+            <button
               onClick={handleLike}
-              className={`rounded-l-full px-4 py-2 h-9 ${
+              className={`rounded-l-full px-4 py-2 h-9 transition-colors flex items-center space-x-2 ${
                 isLiked ? 'bg-gray-700 text-white' : 'text-gray-300 hover:text-white hover:bg-gray-700'
               }`}
             >
-              <ThumbsUp className="h-4 w-4 mr-2" />
-              {formatNumber(video.likes + (isLiked ? 1 : 0))}
-            </Button>
-            <Separator orientation="vertical" className="bg-gray-600 h-6 my-1.5" />
-            <Button
-              variant="ghost"
-              size="sm"
+              <ThumbsUp className="h-4 w-4" />
+              <span>{formatNumber(video.likes + (isLiked ? 1 : 0))}</span>
+            </button>
+            <div className="w-px bg-gray-600 my-1.5"></div>
+            <button
               onClick={handleDislike}
-              className={`rounded-r-full px-4 py-2 h-9 ${
+              className={`rounded-r-full px-4 py-2 h-9 transition-colors ${
                 isDisliked ? 'bg-gray-700 text-white' : 'text-gray-300 hover:text-white hover:bg-gray-700'
               }`}
             >
               <ThumbsDown className="h-4 w-4" />
-            </Button>
+            </button>
           </div>
 
           {/* Share */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full px-4 py-2 h-9"
-          >
-            <Share className="h-4 w-4 mr-2" />
-            Share
-          </Button>
+          <button className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full px-4 py-2 h-9 transition-colors flex items-center space-x-2">
+            <Share className="h-4 w-4" />
+            <span>Share</span>
+          </button>
 
           {/* Download */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full px-4 py-2 h-9"
-          >
-            <Download className="h-4 w-4 mr-2" />
-            Download
-          </Button>
+          <button className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full px-4 py-2 h-9 transition-colors flex items-center space-x-2">
+            <Download className="h-4 w-4" />
+            <span>Download</span>
+          </button>
 
           {/* More */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full p-2 h-9 w-9"
-          >
+          <button className="bg-gray-800 hover:bg-gray-700 text-gray-300 hover:text-white rounded-full p-2 h-9 w-9 transition-colors flex items-center justify-center">
             <MoreHorizontal className="h-4 w-4" />
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* Channel Info */}
       <div className="flex items-start justify-between bg-gray-900/50 rounded-lg p-4">
         <div className="flex items-start space-x-4">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={video.channel.avatar} />
-            <AvatarFallback className="bg-gray-700 text-white">
-              {video.channel.name.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+          <img
+            src={video.channel.avatar}
+            alt={video.channel.name}
+            className="h-10 w-10 rounded-full"
+          />
           
           <div className="flex-1">
             <div className="flex items-center space-x-2 mb-1">
@@ -148,7 +128,7 @@ const VideoDetails = ({ video }) => {
         </div>
 
         {/* Subscribe Button */}
-        <Button
+        <button
           onClick={() => setIsSubscribed(!isSubscribed)}
           className={`ml-4 rounded-full px-6 py-2 font-medium transition-all duration-200 ${
             isSubscribed
@@ -157,7 +137,7 @@ const VideoDetails = ({ video }) => {
           }`}
         >
           {isSubscribed ? 'Subscribed' : 'Subscribe'}
-        </Button>
+        </button>
       </div>
 
       {/* Tags */}

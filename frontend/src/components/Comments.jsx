@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { ThumbsUp, ThumbsDown, MoreVertical, Heart, Pin } from 'lucide-react';
-import { Button } from './ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Textarea } from './ui/textarea';
+import { ThumbsUp, ThumbsDown, MoreVertical, Pin } from 'lucide-react';
 import { mockComments } from '../data/mockData';
 
 const Comments = ({ videoId }) => {
@@ -54,46 +51,44 @@ const Comments = ({ videoId }) => {
         </h3>
         <div className="flex items-center space-x-2 text-gray-400">
           <span className="text-sm">Sort by</span>
-          <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+          <button className="text-gray-400 hover:text-white text-sm">
             Top comments
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* Add Comment */}
       <div className="flex space-x-3">
-        <Avatar className="h-10 w-10 flex-shrink-0">
-          <AvatarImage src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" />
-          <AvatarFallback className="bg-gray-700 text-white">U</AvatarFallback>
-        </Avatar>
+        <img
+          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+          alt="Your avatar"
+          className="h-10 w-10 rounded-full flex-shrink-0"
+        />
         
         <div className="flex-1">
           <form onSubmit={handleCommentSubmit} className="space-y-3">
-            <Textarea
+            <textarea
               placeholder="Add a comment..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              className="bg-transparent border-0 border-b border-gray-600 rounded-none px-0 py-2 text-white placeholder-gray-400 focus:border-white resize-none min-h-[40px]"
+              className="w-full bg-transparent border-0 border-b border-gray-600 px-0 py-2 text-white placeholder-gray-400 focus:border-white resize-none min-h-[40px] focus:outline-none"
               rows="1"
             />
             <div className="flex justify-end space-x-2">
-              <Button
+              <button
                 type="button"
-                variant="ghost"
-                size="sm"
                 onClick={() => setNewComment('')}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white px-4 py-2 rounded transition-colors"
               >
                 Cancel
-              </Button>
-              <Button
+              </button>
+              <button
                 type="submit"
-                size="sm"
                 disabled={!newComment.trim()}
-                className="bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-blue-600 hover:bg-blue-500 text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2 rounded transition-colors"
               >
                 Comment
-              </Button>
+              </button>
             </div>
           </form>
         </div>
@@ -103,12 +98,11 @@ const Comments = ({ videoId }) => {
       <div className="space-y-6">
         {comments.map((comment) => (
           <div key={comment.id} className="flex space-x-3">
-            <Avatar className="h-10 w-10 flex-shrink-0">
-              <AvatarImage src={comment.user.avatar} />
-              <AvatarFallback className="bg-gray-700 text-white">
-                {comment.user.name.charAt(0)}
-              </AvatarFallback>
-            </Avatar>
+            <img
+              src={comment.user.avatar}
+              alt={comment.user.name}
+              className="h-10 w-10 rounded-full flex-shrink-0"
+            />
 
             <div className="flex-1 space-y-2">
               {/* Comment Header */}
@@ -134,64 +128,49 @@ const Comments = ({ videoId }) => {
 
               {/* Comment Actions */}
               <div className="flex items-center space-x-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
+                <button
                   onClick={() => toggleLike(comment.id)}
-                  className={`p-2 h-8 text-gray-400 hover:text-white transition-colors ${
+                  className={`p-2 h-8 text-gray-400 hover:text-white transition-colors flex items-center space-x-1 ${
                     likedComments[comment.id] ? 'text-white' : ''
                   }`}
                 >
-                  <ThumbsUp className="h-4 w-4 mr-1" />
+                  <ThumbsUp className="h-4 w-4" />
                   <span className="text-xs">
                     {comment.likes + (likedComments[comment.id] ? 1 : 0)}
                   </span>
-                </Button>
+                </button>
 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="p-2 h-8 text-gray-400 hover:text-white transition-colors"
-                >
+                <button className="p-2 h-8 text-gray-400 hover:text-white transition-colors">
                   <ThumbsDown className="h-4 w-4" />
-                </Button>
+                </button>
 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="text-gray-400 hover:text-white text-xs px-2 py-1 h-8"
-                >
+                <button className="text-gray-400 hover:text-white text-xs px-2 py-1 h-8">
                   Reply
-                </Button>
+                </button>
 
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="p-2 h-8 text-gray-400 hover:text-white transition-colors"
-                >
+                <button className="p-2 h-8 text-gray-400 hover:text-white transition-colors">
                   <MoreVertical className="h-4 w-4" />
-                </Button>
+                </button>
               </div>
 
               {/* Replies */}
               {comment.replies > 0 && (
                 <div className="mt-3">
-                  <Button
-                    variant="ghost"
-                    size="sm"
+                  <button
                     onClick={() => toggleReplies(comment.id)}
-                    className="text-blue-400 hover:text-blue-300 text-sm font-medium p-0 h-auto"
+                    className="text-blue-400 hover:text-blue-300 text-sm font-medium"
                   >
                     {showReplies[comment.id] ? 'Hide' : 'Show'} {comment.replies} replies
-                  </Button>
+                  </button>
 
                   {showReplies[comment.id] && (
                     <div className="mt-4 space-y-4 pl-6 border-l border-gray-700">
                       <div className="flex space-x-3">
-                        <Avatar className="h-8 w-8 flex-shrink-0">
-                          <AvatarImage src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=32&h=32&fit=crop&crop=face" />
-                          <AvatarFallback className="bg-gray-700 text-white text-xs">R</AvatarFallback>
-                        </Avatar>
+                        <img
+                          src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=32&h=32&fit=crop&crop=face"
+                          alt="Reply user"
+                          className="h-8 w-8 rounded-full flex-shrink-0"
+                        />
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
                             <span className="text-white font-medium text-sm">ReplyUser</span>
@@ -201,16 +180,16 @@ const Comments = ({ videoId }) => {
                             This is a sample reply to demonstrate the nested comment structure.
                           </p>
                           <div className="flex items-center space-x-2 mt-2">
-                            <Button variant="ghost" size="sm" className="p-1 h-6 text-gray-400 hover:text-white">
-                              <ThumbsUp className="h-3 w-3 mr-1" />
+                            <button className="p-1 h-6 text-gray-400 hover:text-white flex items-center space-x-1">
+                              <ThumbsUp className="h-3 w-3" />
                               <span className="text-xs">5</span>
-                            </Button>
-                            <Button variant="ghost" size="sm" className="p-1 h-6 text-gray-400 hover:text-white">
+                            </button>
+                            <button className="p-1 h-6 text-gray-400 hover:text-white">
                               <ThumbsDown className="h-3 w-3" />
-                            </Button>
-                            <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white text-xs px-1 py-0 h-6">
+                            </button>
+                            <button className="text-gray-400 hover:text-white text-xs px-1 py-0 h-6">
                               Reply
-                            </Button>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -225,12 +204,9 @@ const Comments = ({ videoId }) => {
 
       {/* Load More Comments */}
       <div className="flex justify-center">
-        <Button
-          variant="outline"
-          className="border-gray-600 text-gray-400 hover:text-white hover:border-gray-400 bg-transparent"
-        >
+        <button className="border border-gray-600 text-gray-400 hover:text-white hover:border-gray-400 bg-transparent px-6 py-2 rounded transition-colors">
           Show more comments
-        </Button>
+        </button>
       </div>
     </div>
   );
