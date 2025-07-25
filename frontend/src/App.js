@@ -1,52 +1,64 @@
-import { useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import HomePage from "./pages/HomePage";
+import WatchPage from "./pages/WatchPage";
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [currentVideoId, setCurrentVideoId] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  const handleVideoClick = (video) => {
+    setCurrentVideoId(video.id);
+    setCurrentPage('watch');
+  };
+
+  const handleSearch = (query) => {
+    console.log('Search query:', query);
+    // In a real app, this would filter videos or navigate to search results
+  };
+
+  const handleMenuClick = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleLogoClick = () => {
+    setCurrentPage('home');
+    setCurrentVideoId(null);
+  };
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <div className="min-h-screen bg-black">
+      {/* Header */}
+      <Header 
+        onMenuClick={handleMenuClick}
+        onSearch={handleSearch}
+        onLogoClick={handleLogoClick}
+      />
+      
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} />
+      
+      {/* Main Content */}
+      <main 
+        className={`pt-14 transition-all duration-300 ${
+          sidebarOpen ? 'ml-60' : 'ml-20'
+        }`}
+        style={{ minHeight: 'calc(100vh - 3.5rem)' }}
+      >
+        {currentPage === 'home' && (
+          <HomePage onVideoClick={handleVideoClick} />
+        )}
+        
+        {currentPage === 'watch' && currentVideoId && (
+          <WatchPage 
+            videoId={currentVideoId} 
+            onVideoClick={handleVideoClick}
+          />
+        )}
+      </main>
     </div>
   );
 }
